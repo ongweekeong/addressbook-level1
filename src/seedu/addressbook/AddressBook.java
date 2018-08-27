@@ -42,13 +42,6 @@ public class AddressBook {
     private static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
 
     /**
-     *
-     *
-     *
-     *
-     *
-     *
-     *
      * Version info of the program.
      */
     private static final String VERSION = "AddessBook Level 1 - Version 1.0";
