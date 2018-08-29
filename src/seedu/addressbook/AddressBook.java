@@ -44,7 +44,7 @@ public class AddressBook {
     /**
      * Version info of the program.
      */
-    private static final String VERSION = "AddessBook Level 1 - Version 1.0";
+    private static final String VERSION = "AddressBook Level 1 - Version 1.0";
 
     /**
      * A decorative prefix added to the beginning of lines printed by AddressBook
@@ -424,12 +424,18 @@ public class AddressBook {
             return getMessageForInvalidCommandInput(COMMAND_ADD_WORD, getUsageInfoForAddCommand());
         }
 
+        // Check for duplicate names. Prevents entries with exact same name.
+        for (String[] person : getAllPersonsInAddressBook()){
+            if (!person.equals(commandArgs)){
+                System.out.println("Person already exists in Address Book!");
+                return getMessageForInvalidCommandInput(COMMAND_ADD_WORD, getUsageInfoForAddCommand());
+            }
+        }
         // add the person as specified
         final String[] personToAdd = decodeResult.get();
         addPersonToAddressBook(personToAdd);
         return getMessageForSuccessfulAddPerson(personToAdd);
     }
-
     /**
      * Constructs a feedback message for a successful add person command execution.
      *
@@ -449,6 +455,7 @@ public class AddressBook {
      * @param commandArgs full command args string from the user
      * @return feedback display message for the operation result
      */
+
     private static String executeFindPersons(String commandArgs) {
         final Set<String> keywords = extractKeywordsFromFindPersonArgs(commandArgs);
         final ArrayList<String[]> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
@@ -492,6 +499,7 @@ public class AddressBook {
         }
         return matchedPersons;
     }
+
 
     /**
      * Deletes person identified using last displayed index.
